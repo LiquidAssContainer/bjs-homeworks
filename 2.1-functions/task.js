@@ -12,11 +12,11 @@ function getSolutions(a, b, c) {
     solutions.D = discriminant;
 
     if (discriminant >= 0) {
-        let root = ((-b + discriminant ** (1/2)) / (2 * a));
+        let root = ((-b + Math.sqrt(discriminant)) / (2 * a));
         solutions.roots.push(root);
 
         if (discriminant > 0) {
-            root = ((-b - discriminant ** (1/2)) / (2 * a));
+            root = ((-b - Math.sqrt(discriminant)) / (2 * a));
             solutions.roots.push(root);
         }
     }
@@ -44,18 +44,15 @@ function showSolutionsMessage(a, b, c) {
 // Задача № 2
 
 function getAverageScore(data) {
-    let result = {},
-        subjectsSum = 0,
-        scoredSubjectsAmount = 0; // кол-во предметов хотя бы с одной оценкой
+    let result = {};
 
     if (Object.keys(data).length) {
         for (let subject in data) {
-            let averageMark = getAverageMark(data[subject]);
-            subjectsSum += result[subject] = averageMark;
-            scoredSubjectsAmount += averageMark ? 1 : 0;
+            result[subject] = getAverageMark(data[subject]);
         }
-        result.average = subjectsSum / scoredSubjectsAmount;
-    } else {
+        result.average = getAverageMark(Object.values(result));
+    } 
+    else {
         result.average = 0;
     }
 
@@ -93,10 +90,5 @@ function getPersonData(secretData) {
 }
 
 function getDecodedValue(secret) {
-    switch(secret) {
-        case 0:
-            return 'Родриго';
-        case 1:
-            return 'Эмильо';
-    }
+    return secret ? 'Эмильо' : 'Родриго';
 }
