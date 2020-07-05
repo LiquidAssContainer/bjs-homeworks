@@ -1,22 +1,16 @@
-String.prototype.isPalindrome = function(string) {
+String.prototype.isPalindrome = function isPalindrome() {
+    const string = this;
+
     if (string === '') {
         return false;
     }
     
-    string = this.toLowerCase();
-    console.log(string)
-
-    string = string.split(' ').join('');
-    console.log(string)
-
-    let reversedString = string.split("").reverse().join("");
-    console.log(reversedString)
+    const stringInLowerCase = string.toLowerCase();
+    const formattedString = stringInLowerCase.split(' ').join('');
+    const reversedString = formattedString.split("").reverse().join("");
     
-    if (string === reversedString) {
-        return true;
-    } else {
-        return false;
-    }
+    return (formattedString === reversedString) ?
+        true : false;
 }
 
 function getAverageMark(marks) {
@@ -26,28 +20,15 @@ function getAverageMark(marks) {
         sum += marks[i];
     }
 
-    let averageMark = sum ? (sum / marks.length) : 0;
-    let roundedAverage = Math.round(averageMark);
-    return roundedAverage;
+    const averageMark = sum ? (sum / marks.length) : 0;
+    return Math.round(averageMark);
 }
 
 function checkBirthday(birthday) {
-    let now = new Date(),
-        verdict;
+    const now = new Date();
+    const birthdayMilliseconds = Date.parse(birthday);
+    const diff = +now - +birthdayMilliseconds;
 
-        console.log(birthday)
-    birthday = Date.parse(birthday);
-    console.log(birthday)
-    console.log(typeof now)
-    console.log(typeof birthday)
-    // birthday = birthday.getTime();
-    let diff = +now - +birthday;
-    console.log(diff)
-    if ((diff / 1000 / 3600 / 24 / 365) >= 18) {
-        verdict = true;
-    } else {
-        verdict = false;
-    }
-
-    return verdict
+    return ((diff / 1000 / 3600 / 24 / 365.25) >= 18) ?
+        true : false;
 }
