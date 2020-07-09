@@ -22,11 +22,10 @@ class Triangle {
     constructor(a, b, c) {
         if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
             throw new Error('Треугольник с такими сторонами не существует');
-        } else {
-            this.a = a;
-            this.b = b;
-            this.c = c;
         }
+        this.a = a;
+        this.b = b;
+        this.c = c;
     }
 
     getPerimeter() {
@@ -36,7 +35,8 @@ class Triangle {
     getArea() {
         const p = this.getPerimeter() / 2;
         const result = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
-        return +result.toFixed(3);
+        return Number(result.toFixed(3));
+        // return +result.toFixed(3); а так больше нравится
 
     }
 }
@@ -46,14 +46,9 @@ function getTriangle(a, b, c) {
         return new Triangle(a, b, c);
     } catch {
         const message = 'Ошибка! Треугольник не существует';
-        return obj = {
-            getPerimeter() {
-                return message;
-            },
-        
-            getArea() {
-                return message;
-            },
+        return {
+            getPerimeter: () => message,
+            getArea: () => message,
         }
     }
 }
